@@ -28,7 +28,9 @@ updateCredentialEncoding(){
     GROOVY_SCRIPT=`echo "$(cat $BASE_DIR/groovy/update-credentials-system-level.groovy)" | sed 's/\[\]/'$encoding'/g'`
 
     groovyResponse=$(java -jar $BASE_DIR/jenkins-cli.jar -auth $USERNAME:$JENKINS_TOKEN -s "$URL/$controllerPath/" -webSocket groovy = <<< "$GROOVY_SCRIPT")
-    echo "$controllerPath encoded credentials updated"
+    echo "Updating $controllerPath encoded credentials"
+    echo "$groovyResponse"
+    echo "$controllerPath encoded credentials update complete"
   done < "$controllerList"
 
 }
